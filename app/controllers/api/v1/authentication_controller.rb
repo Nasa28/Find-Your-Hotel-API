@@ -3,6 +3,7 @@ module Api
       class AuthenticationController < ApplicationController
 
         def create
+          render json: {token: '123'}, status: :created
         end
 
         def destroy
