@@ -1,4 +1,4 @@
-class HotelsRepresenter
+class HotelsSerializer
 def initialize(hotels) 
     @hotels = hotels
   end

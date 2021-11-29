@@ -3,7 +3,7 @@ module Api
       class HotelsController < ApplicationController
         def index
           hotels = Hotel.all
-          render json: HotelsRepresenter.new(hotels).as_json
+          render json: HotelsSerializer.new(hotels).as_json
         end
 
         def create
