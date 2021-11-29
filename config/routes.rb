@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
-  root to: 'hotels#index'
-  resources :hotels, only: [:index, :create, :destroy]
+    namespace :api do
+    namespace :v1 do
+     resources :hotels, only: [:index, :create, :destroy]
+   end
+    end
 end
