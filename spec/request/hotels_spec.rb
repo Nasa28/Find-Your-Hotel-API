@@ -18,10 +18,15 @@ describe 'API test',  type: :request do
 )
     end
 
-    it 'Returns all Hotels' do
+    it 'Should Return all Hotels' do
         get '/api/v1/hotels'
         expect(response).to have_http_status(:success)
         expect(JSON.parse(response.body).size).to eq(2)
+      end
+
+      it'Should not return undefined ' do
+        get '/api/v1/hotels'
+        expect(JSON.parse(response.body).size).to_not eq(nil)
       end
   end
 end

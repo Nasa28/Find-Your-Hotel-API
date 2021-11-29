@@ -2,7 +2,8 @@ module Api
   module V1
       class HotelsController < ApplicationController
         def index
-          render json: Hotel.all
+          hotels = Hotel.all
+          render json: HotelsRepresenter.new(hotels).as_json
         end
 
         def create
