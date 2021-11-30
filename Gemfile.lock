@@ -71,6 +71,10 @@ GEM
       database_cleaner-core (~> 2.0.0)
     database_cleaner-core (2.0.1)
     diff-lcs (1.4.4)
+    dotenv (2.7.6)
+    dotenv-rails (2.7.6)
+      dotenv (= 2.7.6)
+      railties (>= 3.2)
     erubi (1.10.0)
     factory_bot (6.2.0)
       activesupport (>= 5.0.0)
@@ -84,6 +88,7 @@ GEM
       activesupport (>= 5.0)
     i18n (1.8.11)
       concurrent-ruby (~> 1.0)
+    jwt (2.3.0)
     listen (3.7.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -181,8 +186,10 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
   database_cleaner-active_record
+  dotenv-rails
   factory_bot_rails
   faker
+  jwt
   listen (~> 3.3)
   pg (~> 1.1)
   puma (~> 5.0)

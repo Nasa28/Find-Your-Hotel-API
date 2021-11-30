@@ -2,12 +2,11 @@ require "rails_helper"
 
 describe 'Authentication', type: :request do
   describe 'POST authentication' do
+    let(:user) {FactoryBot.create(:user, username: "chinasa")}
     it "Authenticates the client" do
-      post '/api/v1/authenticate', params: {username: "chinasa", password: "password"}
+      post '/api/v1/authenticate', params: {username: user.username, password: "password"}
       expect(response).to have_http_status(:created)
-      expect(JSON.parse(response.body)).to eq({
-       "token"=> "123"
-      })
+      expect(JSON.parse(response.body)).to_not eq({})
     end
 
     it 'Should return error when username is not present' do
