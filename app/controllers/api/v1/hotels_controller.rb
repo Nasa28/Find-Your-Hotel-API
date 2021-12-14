@@ -5,12 +5,15 @@ module Api
           hotels = Hotel.all
           render json: HotelsSerializer.new(hotels).as_json
         end
-
-        def create
+        def show
+          hotel = Hotel.find(params[:id])
+          if hotel
+            render json: HotelSerializer.new(hotel).as_json, status: :ok
+          else
+            render status: :unprocessable_entity
+          end
         end
 
-        def destroy
-        end
       end
   end
 end
