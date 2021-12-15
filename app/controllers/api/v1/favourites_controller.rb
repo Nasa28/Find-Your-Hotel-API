@@ -3,7 +3,6 @@ module Api
     class FavouritesController < ApplicationController
        include ActionController::HttpAuthentication::Token
 
-      before_action :authenticate_user
       def index
         render json: HotelSerializer.new(@user.favorite_hotels).as_json
       end
