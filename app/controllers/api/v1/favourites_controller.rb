@@ -19,6 +19,14 @@ module Api
       end
 
       def destroy
+        hotel = Hotel.find(params[:id])
+        favorite = Favorite.find(hotel_id: hotel.id)
+
+        if favorite.destroy
+          head :no_content
+        else
+          render json: { error: favorite.errors.messages }, status: :unprocessable_entity
+        end
       end
 
       private 
