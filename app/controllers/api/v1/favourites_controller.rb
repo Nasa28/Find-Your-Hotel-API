@@ -5,7 +5,7 @@ module Api
 
       before_action :authenticate_user
       def index
-       
+        render json: HotelSerializer.new(@user.favorite_hotels).as_json
       end
 
       def create
