@@ -2,8 +2,8 @@ module Api
   module V1
       class HotelsController < ApplicationController
         def index
-          hotels = Hotel.all
-          render json: HotelsSerializer.new(hotels).as_json
+          @hotels = Hotel.all
+          render json: HotelsSerializer.new(@hotels).as_json
         end
         def show
           hotel = Hotel.find(params[:id])
