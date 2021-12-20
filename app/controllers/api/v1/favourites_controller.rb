@@ -2,6 +2,7 @@ module Api
   module V1
     class FavouritesController < ApplicationController
        include ActionController::HttpAuthentication::Token
+      before_action :authenticate_user
 
       def index
         render json: HotelSerializer.new(@user.favorite_hotels).as_json
@@ -29,6 +30,14 @@ module Api
       end
 
       private 
+      def authenticate_user
+        token, _options = token_and_options(request)
+        user_id = AuthenticationTokenService.decode(token)
+        print user_id
+        User.find(user_id)
+      rescue ActiveRecord::RecordNotFound
+        render status: :unauthorized
+      end
 
         def favorite_params
         params.require(:favorite).permit(:hotel_id)

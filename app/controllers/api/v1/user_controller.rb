@@ -9,7 +9,7 @@ module Api
           token = AuthenticationTokenService.encode(user.id)
           render json: {
             token: token,
-            username: user.username
+            username: user.username,
           }, status: :created
         else
           render json: { error: user.errors }, status: :unprocessable_entity
