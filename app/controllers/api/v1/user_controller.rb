@@ -4,15 +4,15 @@ module Api
       rescue_from ActionController::ParameterMissing, with: :parameter_missing
 
       def create
-        user = User.new(user_params)
-        if user.save
-          token = AuthenticationTokenService.encode(user.id)
+        @user = User.new(user_params)
+        if @user.save
+          token = AuthenticationTokenService.encode(@user.id)
           render json: {
             token: token,
-            username: user.username,
+            username: @user.username,
           }, status: :created
         else
-          render json: { error: user.errors }, status: :unprocessable_entity
+          render json: { error: @user.errors }, status: :unprocessable_entity
         end
       end
 

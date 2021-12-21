@@ -5,22 +5,22 @@ module Api
       before_action :authenticate_user
 
       def index
-        render json: HotelSerializer.new(@user.favorite_hotels).as_json
+        render json: HotelSerializer.new(@user.favourite_hotels).as_json
       end
 
       def create
-        hotel = Hotel.find(favorite_params[:hotel_id])
-       favorite = Favorite.new(user_id: @user.id, hotel_id: hotel.id)
-        if favorite.save
+        hotel = Hotel.find(favourite_params[:hotel_id])
+       favourite = Favourite.new(user_id: @user.id, hotel_id:hotel.id)
+        if favourite.save
           head :created
         else
-          render json: { error: favorite.errors.messages }, status: :unprocessable_entity
+          render json: { error: favourite.errors.messages }, status: :unprocessable_entity
         end
       end
 
       def destroy
         hotel = Hotel.find(params[:id])
-        favorite = Favorite.find(hotel_id: hotel.id)
+        favorite = Favourite.find(hotel_id: hotel.id)
 
         if favorite.destroy
           head :no_content
@@ -33,14 +33,13 @@ module Api
       def authenticate_user
         token, _options = token_and_options(request)
         user_id = AuthenticationTokenService.decode(token)
-        print user_id
-        User.find(user_id)
+       @user = User.find(user_id)
       rescue ActiveRecord::RecordNotFound
         render status: :unauthorized
       end
 
-        def favorite_params
-        params.require(:favorite).permit(:hotel_id)
+        def favourite_params
+        params.require(:favourite).permit(:hotel_id)
       end
 
     end
