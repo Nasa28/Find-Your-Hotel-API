@@ -5,7 +5,7 @@ module Api
       before_action :authenticate_user
 
       def index
-        render json: HotelSerializer.new(@user.favourite_hotels).as_json
+        render json: HotelsSerializer.new(@user.favourite_hotels).as_json
       end
 
       def create
@@ -20,7 +20,7 @@ module Api
 
       def destroy
         hotel = Hotel.find(params[:id])
-        favorite = Favourite.find(hotel_id: hotel.id)
+        favorite = Favourite.find_by(params[:hotel_id])
 
         if favorite.destroy
           head :no_content
