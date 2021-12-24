@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # AuthenticationTokenService
 class AuthenticationTokenService
   HMAC_SECRET = ENV['HMAC_SECRET']

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Hotel < ApplicationRecord
   validates :name, presence: true, length: { minimum: 4 }
   validates :address, presence: true, length: { minimum: 8 }
