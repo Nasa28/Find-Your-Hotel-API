@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 module Api
   module V1
+    # UserController
     class UserController < ApplicationController
       rescue_from ActionController::ParameterMissing, with: :parameter_missing
 
@@ -9,7 +12,7 @@ module Api
           token = AuthenticationTokenService.encode(@user.id)
           render json: {
             token: token,
-            username: @user.username,
+            username: @user.username
           }, status: :created
         else
           render json: { error: @user.errors }, status: :unprocessable_entity
@@ -25,7 +28,6 @@ module Api
       def user_params
         params.require(:user).permit(:username, :password, :password_confirmation)
       end
-
     end
   end
 end

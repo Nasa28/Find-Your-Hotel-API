@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 module Api
   module V1
+    # FavouritesController
     class FavouritesController < ApplicationController
-       include ActionController::HttpAuthentication::Token
+      include ActionController::HttpAuthentication::Token
       before_action :authenticate_user
 
       def index
@@ -9,8 +12,8 @@ module Api
       end
 
       def create
-        hotel = Hotel.find(favourite_params[:hotel_id])
-       favourite = Favourite.new(user_id: @user.id, hotel_id:hotel.id)
+        @hotel = Hotel.find(favourite_params[:hotel_id])
+        favourite = Favourite.new(user_id: @user.id, hotel_id: @hotel.id)
         if favourite.save
           head :created
         else
@@ -19,7 +22,7 @@ module Api
       end
 
       def destroy
-        hotel = Hotel.find(params[:id])
+        Hotel.find(params[:id])
         favorite = Favourite.find_by(params[:hotel_id])
 
         if favorite.destroy
@@ -29,19 +32,19 @@ module Api
         end
       end
 
-      private 
+      private
+
       def authenticate_user
         token, _options = token_and_options(request)
         user_id = AuthenticationTokenService.decode(token)
-       @user = User.find(user_id)
+        @user = User.find(user_id)
       rescue ActiveRecord::RecordNotFound
         render status: :unauthorized
       end
 
-        def favourite_params
+      def favourite_params
         params.require(:favourite).permit(:hotel_id)
       end
-
     end
   end
 end
