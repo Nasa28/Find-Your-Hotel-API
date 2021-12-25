@@ -3,6 +3,7 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
+      root to: 'hotels#index'
       post 'signup', to: 'user#create'
       post 'login', to: 'authentication#create'
       resources :hotels, only: %i[index show]
